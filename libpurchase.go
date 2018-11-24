@@ -33,8 +33,8 @@ func (db PurchaseDB) IsExist(name string) bool {
   return false
 }
 
-// CommentSet(): 設定備註
-func (db *PurchaseDB) CommentSet(comment string) {
+// SetComment(): 設定備註
+func (db *PurchaseDB) SetComment(comment string) {
   (*db).Comment = comment
   (*db).UpdDB()
 }
@@ -53,10 +53,11 @@ func (db *PurchaseDB) AddProduct(name string, price float64, count int) {
 }
 
 // RemoveProduct(): 從購物資料庫移除一個商品
+// 若 name 為 *，則刪除所有產品。
 func (db *PurchaseDB) RemoveProduct(name string) {
   var tmpdb []Product
   for _, data := range db.ProductList {
-    if data.Name == name {
+    if data.Name == name || name == "*" {
       continue
     }
     tmpdb = append(tmpdb, data)
@@ -109,7 +110,7 @@ func (db PurchaseDB) Print(Format string, ProductFormat string) string {
   var ProductDetails string
   var FinalList      string
   var TotalPrice     float64
-  var Time           string = db.Time.Format("2006-01-02 03:04:05 PM")
+  var Time           string = db.Time.Format(TimeFormat) // TimeFormat 可在 config.go 修改
   
   // ProductDetails
   for _, data := range db.ProductList {

@@ -12,7 +12,7 @@ const FormatTemplate = `唯一代碼：%s
 === 購買之產品 ===
 產品		價格		數量
 %s
-總價：%.2f$NTD
+總價：%.2f$
 備註：%s
 ===============
 `
@@ -22,4 +22,16 @@ const FormatTemplate = `唯一代碼：%s
 // 第二個 %.2f：產品價格
 // 第三個 %d：產品數量
 // 可參考 FormatTemplate。
-const ProductFormatTemplate = "%s       %.2f$NTD    %d個\n"
+const ProductFormatTemplate = "%s       %.2f$    %d個\n"
+
+// 顯示用時間的格式
+// Go 時間格式參考：
+// 2006: 年
+// 01:   月
+// 02:   日
+// 03:   12 小時制時
+// 15:   24 小時制時
+// 04:   月
+// 05:   日
+// PM:   12 小時制才比較有用；顯示 AM/PM
+const TimeFormat = "2006-01-02 03:04:05 PM"

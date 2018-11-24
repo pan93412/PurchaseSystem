@@ -54,7 +54,7 @@ func action(db *PurchaseDB, inputd []string) {
         com = input("請輸入備註：")
       }
       
-      (*db).CommentSet(com)
+      (*db).SetComment(com)
       fmt.Printf("備註「%s」加入或編輯成功。\n", com)
     
     case "remove": // 從購物資料庫中移除某產品
@@ -66,7 +66,11 @@ func action(db *PurchaseDB, inputd []string) {
       }
       
       (*db).RemoveProduct(prod)
-      fmt.Printf("產品「%s」刪除成功。\n", prod)
+      if prod == "*" {
+        fmt.Println("已刪除所有產品。")
+      } else {
+        fmt.Printf("產品「%s」刪除成功。\n", prod)
+      }
 
     case "add": // 增加一商品到購物資料庫中
       var prod string
